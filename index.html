@@ -5,6 +5,7 @@
     <title>radiosToSlider. jquery plugin to create a slider using a list of radio buttons</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/examples.css">
+    <link rel="stylesheet" href="css/radios-to-slider.css">
     <link rel="icon" type="image/png" href="http://rubentd.com/img/favicon.png">
 </head>
 
@@ -16,13 +17,57 @@
     	<p>jquery plugin to create a slider using a list of radio buttons</p>
         <p>By <a href="http://www.twitter.com/darthrubens">@darthrubens</a></p>
 
-		<section>
-    		<h2>Usage</h2>
+		<section class="demo">
+			
+    		<div class="block">
+    			<h2>Transform this: </h2>
+    			<div id="radios-dummy">
+    				<input id="o1" name="opt" type="radio">
+    				<label for="o1">1 year</label>
+
+    				<input id="o2" name="opt" type="radio">
+    				<label for="o2">2 years</label>
+
+    				<input id="o3" name="opt" type="radio" checked>
+    				<label for="o3">3 years</label>
+
+    				<input id="o4" name="opt" type="radio">
+    				<label for="o4">4 years</label>
+
+    				<input id="o5" name="opt" type="radio">
+    				<label for="o5">5+ years</label>
+
+    			</div>
+    		</div>
+
+    		<div class="block">
+
+    			<h2>Into this:</h2> 
+    			<div id="radios">
+    				<input id="option1" name="options" type="radio">
+    				<label for="option1">1 <br>year</label>
+
+    				<input id="option2" name="options" type="radio">
+    				<label for="option2">2 years</label>
+
+    				<input id="option3" name="options" type="radio" checked>
+    				<label for="option3">3 years</label>
+
+    				<input id="option4" name="options" type="radio">
+    				<label for="option4">4 years</label>
+
+    				<input id="option5" name="options" type="radio">
+    				<label for="option5">5+ years</label>
+
+    			</div>
+    		</div>
+
 			<div class ="code">
-                <script src="https://gist.github.com/darthrubens/8557897.js"></script>         
+            	<script src="https://gist.github.com/darthrubens/9352503.js"></script>
             </div>
 
-    	<section>
+
+    	<section class="demo">
     		<h2>Downloads:</h2>
 
     		<ul>
@@ -56,7 +101,13 @@
             <a href="https://twitter.com/darthrubens" class="twitter-follow-button" data-show-count="false">Follow @darthrubens</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         </section>
+        <a href="https://plus.google.com/+Rub&eacute;nTorresFED?rel=author" target="_blank">Rub&eacute;n Torres</a>
+
     </main>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/jquery.radios-to-slider.js"></script>
+	<script src="js/index.js"></script>
 
 </body>
 </html>

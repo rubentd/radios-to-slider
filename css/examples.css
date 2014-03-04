@@ -7,6 +7,11 @@ a, a:hover, a:visited{
 	color:#666;
 }
 
+.block{
+	display:block;
+	margin-bottom:30px;
+}
+
 .logo{
 	width:150px;
 	height:86px;
@@ -77,6 +82,7 @@ hr{
 
 .code{
 	width:650px;
+	margin-top:100px;
 }
 
 table.options th{
@@ -95,4 +101,8 @@ table.options th, td{
 
 table.options td:first-child{
 	color:navy;
+}
+
+.options section.demo{
+	margin:50px 0 50px 0;
 }
