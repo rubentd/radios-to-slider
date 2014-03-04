@@ -15,7 +15,8 @@
 
 	function RadiosToSlider(element, options){
 		this.bearer=element;
-		this.options=options;
+		this.options=options
+		this.currentLevel=0; //this means no level selected
 	}
 
 	RadiosToSlider.prototype = {
@@ -44,6 +45,7 @@
 			});
 		},
 
+		//Add level indicators to DOM
 		addLevels: function(){
 			var b=this.bearer;
 			this.bearer.find('input[type=radio]').each(function(){
@@ -52,27 +54,44 @@
 			});
 			var level=0;
 			this.bearer.find('.slider-level').each(function(){
-				if(level > 0){
-					$(this).css('margin-left',  LEVEL_MARGIN + 'px');
-				}
+				var paddingLeft = parseInt(b.css('padding-left').replace('px', ''));
+				$(this).css('left', paddingLeft + (level*LEVEL_MARGIN) + (level*LEVEL_WIDTH) + 'px');
 				level++;
 			})
 		},
 
+		//Add slider bar to DOM
 		addBar: function(){
 			this.bearer.append("<ins class='slider-bar'><span class='slider-knob'></span></ins>");
 		},
 
+		//set width of slider bar and current level
 		setSlider: function(){
 			var radio=1;
+			var slider=this;
 			this.bearer.find('input[type=radio]').each( function(){
 				var radioId=$(this).attr('id');
 				if($(this).prop('checked')){
-					console.log(radio);
 					$('.slider-bar').css('display', 'block');
 					$('.slider-bar').width( (radio*KNOB_WIDTH) + (radio-1)*KNOB_MARGIN + 'px');
+					slider.currentLevel=radio;
 				}
 				radio++;
+			});
+			//Set style for lower levels
+			var label=0;
+			this.bearer.find('.slider-level').each(function(){
+				label++;
+				console.log(label + ' ' + slider.currentLevel);
+				if(label < slider.currentLevel){
+					$(this).show();
+					$(this).addClass('slider-lower-level');
+				}else if(label == slider.currentLevel){
+					$(this).hide();
+				}else{
+					$(this).show();
+					$(this).removeClass('slider-lower-level');
+				}
 			})
 		},
 
