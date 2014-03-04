@@ -4,7 +4,8 @@
     "description": "jquery plugin to create a slider using a list of radio buttons",
     "keywords": [
         "slider",
-        "radio buttons"
+        "radio",
+        "buttons"
     ],
     "version": "0.1.0",
     "author": {
