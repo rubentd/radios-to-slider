@@ -91,7 +91,15 @@
 					$(this).show();
 					$(this).removeClass('slider-lower-level');
 				}
-			})
+			});
+			//Add bold style for selected label
+			var label=0;
+			this.bearer.find('.slider-label').each(function(){
+				label++;
+				if(label == slider.currentLevel){
+					$(this).css('text-decoration','bold');
+				}
+			});
 		},
 
 		addInteraction: function(){

@@ -2,7 +2,9 @@
 	background-color:#e0e0e0;
 	display:block;
 	position:relative;
+	margin-bottom:80px;
 }
+
 
 .radios-to-slider.medium{
 	height:22px;
@@ -60,6 +62,10 @@
 	position:absolute;
 	left:0;
 	top:0;
+	-webkit-transition:.2s;
+	-moz-transition:.2s;
+	-o-transition:.2s;
+	transition:.2s;
 }
 
 .radios-to-slider.medium .slider-bar{
