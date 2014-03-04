@@ -1,5 +1,5 @@
 /* 
- * radiosToSlider v0.1.2
+ * radiosToSlider v0.1.3
  * jquery plugin to create a slider using a list of radio buttons
  * (c)2014 Rubén Torres - rubentdlh@gmail.com
  * Released under the MIT license
@@ -97,7 +97,9 @@
 			this.bearer.find('.slider-label').each(function(){
 				label++;
 				if(label == slider.currentLevel){
-					$(this).css('text-decoration','bold');
+					$(this).css('font-weight','bold');
+				}else{
+					$(this).css('font-weight','normal');
 				}
 			});
 		},
