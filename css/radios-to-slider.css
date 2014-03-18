@@ -3,6 +3,7 @@
 	display:block;
 	position:relative;
 	margin-bottom:80px;
+	box-sizing:content-box;
 }
 
 
@@ -62,6 +63,9 @@
 	position:absolute;
 	left:0;
 	top:0;
+}
+
+.slider-bar.transition-enabled{
 	-webkit-transition:.2s;
 	-moz-transition:.2s;
 	-o-transition:.2s;

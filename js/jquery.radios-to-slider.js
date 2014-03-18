@@ -1,5 +1,5 @@
 /* 
- * radiosToSlider v0.1.4
+ * radiosToSlider v0.1.5
  * jquery plugin to create a slider using a list of radio buttons
  * (c)2014 Rubén Torres - rubentdlh@gmail.com
  * Released under the MIT license
@@ -72,9 +72,12 @@
 			this.bearer.find('input[type=radio]').each( function(){
 				var radioId=$(this).attr('id');
 				if($(this).prop('checked')){
-					$('.slider-bar').css('display', 'block');
-					$('.slider-bar').width( (radio*KNOB_WIDTH) + (radio-1)*KNOB_MARGIN + 'px');
+					slider.bearer.find('.slider-bar').css('display', 'block');
+					slider.bearer.find('.slider-bar').width( (radio*KNOB_WIDTH) + (radio-1)*KNOB_MARGIN + 'px');
 					slider.currentLevel=radio;
+				}
+				if(slider.options.animation){
+					slider.bearer.find('.slider-bar').addClass('transition-enabled');
 				}
 				radio++;
 			});
@@ -97,9 +100,9 @@
 			this.bearer.find('.slider-label').each(function(){
 				label++;
 				if(label == slider.currentLevel){
-					$(this).css('font-weight','bold');
+					$(this).addClass('slider-label-active');
 				}else{
-					$(this).css('font-weight','normal');
+					$(this).removeClass('slider-label-active');
 				}
 			});
 		},
@@ -107,7 +110,7 @@
 		addInteraction: function(){
 			var slider=this;
 
-			$('.slider-level').click( function(){
+			this.bearer.find('.slider-level').click( function(){
 				var radioId = $(this).attr('data-radio');
 				$('#' + radioId).prop('checked', true);
 				slider.setSlider();
@@ -132,7 +135,8 @@
 	}
 
 	$.fn.radiosToSlider.defaults = {
-        size: 'medium'
+        size: 'medium',
+        animation: true
     };
 
 })(jQuery);
