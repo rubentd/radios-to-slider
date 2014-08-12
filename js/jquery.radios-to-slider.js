@@ -1,5 +1,5 @@
 /* 
- * radiosToSlider v0.1.9
+ * radiosToSlider v0.2.0
  * jquery plugin to create a slider using a list of radio buttons
  * (c)2014 Rubén Torres - rubentdlh@gmail.com
  * Released under the MIT license
@@ -7,11 +7,12 @@
 
 (function($) {
 
+
+	var KNOB_WIDTH=32;
+	var KNOB_MARGIN=28;
+	var LEVEL_MARGIN=KNOB_MARGIN+10;
 	var LABEL_WIDTH=44;
 	var LEVEL_WIDTH=22;
-	var LEVEL_MARGIN=50;
-	var KNOB_WIDTH=32;
-	var KNOB_MARGIN=40;
 
 	function RadiosToSlider(element, options){
 		this.bearer=element;
