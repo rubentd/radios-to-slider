@@ -34,7 +34,7 @@
 		},
 
 		fitContainer: function() {
-			// If responsive, calculate KNOB_MARGIN based on container width
+			// If fitContainer, calculate KNOB_MARGIN based on container width
 			if ( this.options.fitContainer ) {
 				KNOB_MARGIN = (this.bearer.width()-KNOB_WIDTH) / (this.numOptions-1) - KNOB_WIDTH;
 				LEVEL_MARGIN=KNOB_MARGIN+10;
