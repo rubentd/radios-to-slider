@@ -1,9 +1,8 @@
 radios-to-slider
 ===========
+[![Bower version](https://badge.fury.io/bo/radios-to-slider.svg)](http://badge.fury.io/bo/radios-to-slider)
 
 jquery plugin to create a slider using a list of radio buttons
-
-[![Bower version](https://badge.fury.io/bo/radios-to-slider.svg)](http://badge.fury.io/bo/radios-to-slider)
 
 
 ###Usage
