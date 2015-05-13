@@ -50,6 +50,11 @@
 	text-align:center;
 }
 
+.slider-label-active
+{
+    font-weight: bold;
+}
+
 .radios-to-slider.medium .slider-label{
 	top:50px;
 	width:44px;
