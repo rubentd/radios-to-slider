@@ -1,7 +1,7 @@
-/* 
- * radiosToSlider v0.2.0
+/*
+ * radiosToSlider v0.3.0
  * jquery plugin to create a slider using a list of radio buttons
- * (c)2014 Rubén Torres - rubentdlh@gmail.com
+ * (c)2014 Rubï¿½n Torres - rubentdlh@gmail.com
  * Released under the MIT license
  */
 
@@ -21,7 +21,7 @@
 	}
 
 	RadiosToSlider.prototype = {
-		
+
 		activate: function(){
 			// Get number options
 			this.numOptions=this.bearer.find('input[type=radio]').length;
@@ -141,7 +141,7 @@
 
 			var slider = new RadiosToSlider($(this), options);
 			slider.activate();
-		});	
+		});
 	}
 
 	$.fn.radiosToSlider.defaults = {

@@ -10,6 +10,7 @@ a, a:hover, a:visited{
 .block{
 	display:block;
 	margin-bottom:30px;
+	width: 300px;
 }
 
 .logo{
