@@ -2,6 +2,10 @@
     "name": "radios-to-slider",
     "title": "RadiosToSlider",
     "description": "jquery plugin to create a slider using a list of radio buttons",
+    "main": [
+        "dist/radios-to-slider.css",
+        "dist/jquery.radios-to-slider.js",
+    ]
     "keywords": [
         "slider",
         "radio",
