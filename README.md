@@ -37,6 +37,10 @@ jquery plugin to create a slider using a list of radio buttons
 Option	|Values	|Default
 --- | --- | ---
 animation	| true, false	|true
+onSelect	| callback | null
+size	| string | "medium"
+fitContainer	| true, false | true
 
 ###Demo and examples
-[rubentd.com/radios-to-slider](http://rubentd.com/radios-to-slider)
+* [rubentd.com/radios-to-slider](http://rubentd.com/radios-to-slider)
+* [AngularJS Module](https://github.com/wodka/angular-radios-to-slider)
