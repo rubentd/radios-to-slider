@@ -6,15 +6,12 @@
  */
 
 (function($) {
-
-
-	var KNOB_WIDTH=32;
-	var KNOB_MARGIN=28;
-	var LEVEL_MARGIN=KNOB_MARGIN+10;
-	var LABEL_WIDTH=44;
-	var LEVEL_WIDTH=22;
-
 	function RadiosToSlider(element, options){
+		this.KNOB_WIDTH=32;
+		this.KNOB_MARGIN=28;
+		this.LEVEL_MARGIN=this.KNOB_MARGIN+10;
+		this.LABEL_WIDTH=44;
+		this.LEVEL_WIDTH=22;
 		this.bearer=element;
 		this.options=options;
 		this.currentLevel=0; //this means no level selected
@@ -58,8 +55,8 @@
 		fitContainer: function() {
 			// If fitContainer, calculate KNOB_MARGIN based on container width
 			if ( this.options.fitContainer ) {
-				KNOB_MARGIN = (this.bearer.width()-KNOB_WIDTH) / (this.numOptions-1) - KNOB_WIDTH;
-				LEVEL_MARGIN=KNOB_MARGIN+10;
+				this.KNOB_MARGIN = (this.bearer.width()-this.KNOB_WIDTH) / (this.numOptions-1) - this.KNOB_WIDTH;
+				this.LEVEL_MARGIN=this.KNOB_MARGIN+10;
 			}
 		},
 
@@ -67,10 +64,11 @@
 			this.bearer.find('input[type=radio]').hide();
 			this.bearer.addClass("radios-to-slider");
 			this.bearer.addClass(this.options.size);
-			this.bearer.css('width', (this.numOptions*LEVEL_WIDTH) + (this.numOptions-1)*LEVEL_MARGIN + 'px');
+			this.bearer.css('width', (this.numOptions*this.LEVEL_WIDTH) + (this.numOptions-1)*this.LEVEL_MARGIN + 'px');
 			var label=0;
+			var slider=this;
 			this.bearer.find('label').each(function(){
-				var leftPos = KNOB_WIDTH/2 - (LABEL_WIDTH/2) + label*LEVEL_MARGIN + label*LEVEL_WIDTH;
+				var leftPos = slider.KNOB_WIDTH/2 - (slider.LABEL_WIDTH/2) + label*slider.LEVEL_MARGIN + label*slider.LEVEL_WIDTH;
 				$(this).addClass('slider-label');
 				$(this).css('left', leftPos + 'px');
 				label++;
@@ -80,6 +78,7 @@
 		//Add level indicators to DOM
 		addLevels: function(){
 			var b=this.bearer;
+			var slider=this;
 			this.bearer.find('input[type=radio]').each(function(){
 				var radioId=$(this).attr('id');
 				b.append("<ins class='slider-level' data-radio='" + radioId + "'></ins>");
@@ -87,7 +86,7 @@
 			var level=0;
 			this.bearer.find('.slider-level').each(function(){
 				var paddingLeft = parseInt(b.css('padding-left').replace('px', ''));
-				$(this).css('left', paddingLeft + (level*LEVEL_MARGIN) + (level*LEVEL_WIDTH) + 'px');
+				$(this).css('left', paddingLeft + (level*slider.LEVEL_MARGIN) + (level*slider.LEVEL_WIDTH) + 'px');
 				level++;
 			})
 		},
@@ -106,7 +105,7 @@
 				var radioId=$(this).attr('id');
 				if($(this).prop('checked')){
 					slider.bearer.find('.slider-bar').css('display', 'block');
-					slider.bearer.find('.slider-bar').width( (radio*KNOB_WIDTH) + (radio-1)*KNOB_MARGIN + 'px');
+					slider.bearer.find('.slider-bar').width( (radio*slider.KNOB_WIDTH) + (radio-1)*slider.KNOB_MARGIN + 'px');
 					slider.currentLevel=radio;
 				}
 				if(slider.options.animation){
