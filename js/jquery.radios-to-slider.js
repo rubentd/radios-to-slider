@@ -40,6 +40,7 @@
 				slider.addBaseStyle();
 				slider.addLevels();
 				slider.setSlider();
+				slider.addInteraction();
 			});
 		},
 
