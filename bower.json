@@ -5,7 +5,7 @@
     "main": [
         "dist/radios-to-slider.css",
         "dist/jquery.radios-to-slider.js",
-    ]
+    ],
     "keywords": [
         "slider",
         "radio",
