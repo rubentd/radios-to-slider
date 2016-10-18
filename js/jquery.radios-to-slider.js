@@ -1,7 +1,7 @@
-/* 
+/**
  * radiosToSlider v0.2.0
  * jquery plugin to create a slider using a list of radio buttons
- * (c)2014 Rubén Torres - rubentdlh@gmail.com
+ * (c)2014 RubÃ©n Torres - rubentdlh@gmail.com
  * Released under the MIT license
  */
 
@@ -31,6 +31,27 @@
 			this.addBar();
 			this.setSlider();
 			this.addInteraction();
+
+			var slider = this;
+
+			$(window).on('resize orientationChanged', function() {
+				slider.reset();
+				slider.fitContainer();
+				slider.addBaseStyle();
+				slider.addLevels();
+				slider.setSlider();
+			});
+		},
+
+		reset: function() {
+			this.bearer.find('label').each(function(){
+				$(this).removeClass('slider-label');
+				$(this).css('left', 0);
+			});
+			this.bearer.find('.slider-level').each(function(){
+				$(this).remove();
+			});
+			this.bearer.css('width', 'auto');
 		},
 
 		fitContainer: function() {
@@ -79,6 +100,7 @@
 		setSlider: function(){
 			var radio=1;
 			var slider=this;
+			var label;
 			this.bearer.find('input[type=radio]').each( function(){
 				var radioId=$(this).attr('id');
 				if($(this).prop('checked')){
@@ -92,7 +114,7 @@
 				radio++;
 			});
 			//Set style for lower levels
-			var label=0;
+			label=0;
 			this.bearer.find('.slider-level').each(function(){
 				label++;
 				if(label < slider.currentLevel){
@@ -106,7 +128,7 @@
 				}
 			});
 			//Add bold style for selected label
-			var label=0;
+			label=0;
 			this.bearer.find('.slider-label').each(function(){
 				label++;
 				if(label == slider.currentLevel){
@@ -122,7 +144,13 @@
 
 			this.bearer.find('.slider-level').click( function(){
 				var radioId = $(this).attr('data-radio');
-				slider.bearer.find('#' + radioId).prop('checked', true);
+				var radioElement = slider.bearer.find('#' + radioId);
+				radioElement.prop('checked', true);
+
+				if (slider.options.onSelect) {
+					slider.options.onSelect(radioElement);
+				}
+
 				slider.setSlider();
 
 			});
@@ -133,7 +161,7 @@
 
 		}
 
-	}
+	};
 
 	$.fn.radiosToSlider = function(options) {
 		this.each(function(){
@@ -142,12 +170,13 @@
 			var slider = new RadiosToSlider($(this), options);
 			slider.activate();
 		});	
-	}
+	};
 
 	$.fn.radiosToSlider.defaults = {
-        size: 'medium',
-        animation: true,
-        fitContainer: true
+		size: 'medium',
+		animation: true,
+		fitContainer: true,
+		onSelect: null
     };
 
 })(jQuery);
