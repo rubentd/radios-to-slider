@@ -1,5 +1,8 @@
 radios-to-slider
 ===========
+
+If you are using angular, check out this awesome [AngularJS Module](https://github.com/wodka/angular-radios-to-slider) by wodka
+
 [![Bower version](https://badge.fury.io/bo/radios-to-slider.svg)](http://badge.fury.io/bo/radios-to-slider)
 
 jquery plugin to create a slider using a list of radio buttons
@@ -43,4 +46,3 @@ fitContainer	| true, false | true
 
 ###Demo and examples
 * [rubentd.com/radios-to-slider](http://rubentd.com/radios-to-slider)
-* [AngularJS Module](https://github.com/wodka/angular-radios-to-slider)
