@@ -1,5 +1,5 @@
 /**
- * radiosToSlider v0.2.2
+ * radiosToSlider v0.3.1
  * jquery plugin to create a slider using a list of radio buttons
  * (c)2014 Rubén Torres - rubentdlh@gmail.com
  * Released under the MIT license
@@ -22,12 +22,14 @@
         activate: function() {
             // Get number options
             this.numOptions = this.bearer.find('input[type=radio]').length;
+            this.reset(); // helps prevent duplication
             this.fitContainer();
             this.addBaseStyle();
             this.addLevels();
             this.addBar();
             this.setSlider();
             this.addInteraction();
+            this.setDisabled();
 
             var slider = this;
 
@@ -38,6 +40,7 @@
                 slider.addLevels();
                 slider.setSlider();
                 slider.addInteraction();
+                slider.setDisabled();
             });
         },
 
@@ -140,42 +143,98 @@
         },
 
         addInteraction: function() {
-            var slider = this;
+            var slider = this,
+                $levels = this.bearer.find('.slider-level:not(.disabled)'),
+                $inputs = this.bearer.find('input[type=radio]:not(:disabled)');
 
-            this.bearer.find('.slider-level').click(function() {
-                var radioId = $(this).attr('data-radio');
-                var radioElement = slider.bearer.find('#' + radioId);
+            $levels.on('click', function() {
+                var radioId = $(this).attr('data-radio'),
+                    radioElement = slider.bearer.find('#' + radioId);
+
                 radioElement.prop('checked', true);
 
                 if (slider.options.onSelect) {
-                    slider.options.onSelect(radioElement);
+                    slider.options.onSelect(radioElement, [
+                        $levels,
+                        $inputs
+                    ]);
                 }
 
                 slider.setSlider();
 
             });
 
-            this.bearer.find('input[type=radio]').change(function() {
+            $inputs.on('change', function() {
                 slider.setSlider();
             });
 
+        },
+
+        setDisabled: function(isDisable, cb) {
+            if (!this.options.isDisable) return;
+
+            this.setDisable();
+        },
+
+        setDisable: function(cb) {
+            this.options.isDisable = true;
+
+            var slider = this,
+                $levels = this.bearer.find('.slider-level'),
+                $inputs = this.bearer.find('input[type=radio]');
+
+            $.merge($levels, $inputs).each(function() {
+                $(this).prop('disabled', true).addClass('disabled');
+                $(this).off('click change');
+            });
+
+            if (typeof cb === "function") {
+                cb($levels, $inputs);
+            }
+        },
+
+        setEnable: function(cb) {
+            this.options.isDisable = false;
+
+            var slider = this,
+                $levels = this.bearer.find('.slider-level'),
+                $inputs = this.bearer.find('input[type=radio]');
+
+            $.merge($levels, $inputs).each(function() {
+                $(this).prop('disabled', false).removeClass('disabled');
+                slider.addInteraction();
+            });
+
+            if (typeof cb === "function") {
+                cb($levels, $inputs);
+            }
         }
 
     };
 
     $.fn.radiosToSlider = function(options) {
+        var rtn = [];
+
         this.each(function() {
             options = $.extend({}, $.fn.radiosToSlider.defaults, options);
 
             var slider = new RadiosToSlider($(this), options);
             slider.activate();
+
+            rtn.push({
+                setDisable: slider.setDisable.bind(slider),
+                setEnable: slider.setEnable.bind(slider)
+            });
         });
+
+        return rtn;
     };
 
     $.fn.radiosToSlider.defaults = {
         size: 'medium',
         animation: true,
         fitContainer: true,
+        isDisable: false,
         onSelect: null
     };
 
