@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## Fixed
+
+- Usage text in README.md
+
 ## [0.3.1] - 2016-11-18
 
 ## Added

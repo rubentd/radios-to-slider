@@ -10,19 +10,19 @@ jQuery plugin to create a slider using a list of radio buttons
 
 ```html
 <div id="radios">
-    <input id="option1" name="options" type="radio">
+    <input id="option1" name="options" type="radio" value="1">
     <label for="option1">1 <br>year</label>
 
-    <input id="option2" name="options" type="radio">
+    <input id="option2" name="options" type="radio" value="2">
     <label for="option2">2 years</label>
 
-    <input id="option3" name="options" type="radio" checked>
+    <input id="option3" name="options" type="radio" value="3" checked>
     <label for="option3">3 years</label>
 
-    <input id="option4" name="options" type="radio">
+    <input id="option4" name="options" type="radio" value="4">
     <label for="option4">4 years</label>
 
-    <input id="option5" name="options" type="radio">
+    <input id="option5" name="options" type="radio" value="5">
     <label for="option5">5+ years</label>
 </div>
 
@@ -31,10 +31,10 @@ jQuery plugin to create a slider using a list of radio buttons
         var radios = $("#radios").radiosToSlider();
 
         // Disable input
-        radios.first().setDisable();
+        radios.setDisable();
 
         // Enable input
-        radios.first().setDisable();
+        radios.setDisable();
     });
 </script>
 ```
