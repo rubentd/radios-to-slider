@@ -15,6 +15,7 @@
         this.bearer = element;
         this.options = options;
         this.currentLevel = 0; //this means no level selected
+        this.value = null;
     }
 
     RadiosToSlider.prototype = {
@@ -92,18 +93,16 @@
         //Add level indicators to DOM
         addLevels: function() {
             var $bearer = this.bearer,
-                $inputs = $bearer.find('input[type=radio]'),
-                $levels = $bearer.find('.slider-level'),
                 level = 0,
                 slider = this;
 
-            $inputs.each(function() {
+            $bearer.find('input[type=radio]').each(function() {
                 var $this = $(this);
 
                 $bearer.append("<ins class='slider-level' data-radio='" + $this.attr('id') + "' value=" + $this.val() + "></ins>");
             });
 
-            $levels.each(function() {
+            $bearer.find('.slider-level').each(function() {
                 var $this = $(this),
                     paddingLeft = $bearer.css('padding-left').replace('px', '') - 0,
                     width = paddingLeft + (level * slider.LEVEL_MARGIN) + (level * slider.LEVEL_WIDTH);
