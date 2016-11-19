@@ -99,7 +99,7 @@
             $bearer.find('input[type=radio]').each(function() {
                 var $this = $(this);
 
-                $bearer.append("<ins class='slider-level' data-radio='" + $this.attr('id') + "' value=" + $this.val() + "></ins>");
+                $bearer.append("<ins class='slider-level' data-radio='" + $this.attr('id') + "' data-value=" + $this.val() + "></ins>");
             });
 
             $bearer.find('.slider-level').each(function() {
@@ -184,12 +184,15 @@
 
         addInteraction: function() {
             var slider = this,
-                $levels = this.bearer.find('.slider-level:not(.disabled)'),
-                $inputs = this.bearer.find('input[type=radio]:not(:disabled)');
+                $bearer = slider.bearer,
+                $levels = $bearer.find('.slider-level:not(.disabled)'),
+                $inputs = $bearer.find('input[type=radio]:not(:disabled)');
 
             $levels.on('click', function() {
-                var radioId = $(this).attr('data-radio'),
-                    radioElement = slider.bearer.find('#' + radioId);
+                var $this = $(this),
+                    val = $this.attr('data-value'),
+                    radioId = $this.attr('data-radio'),
+                    radioElement = $bearer.find('#' + radioId);
 
                 radioElement.prop('checked', true);
 
@@ -200,10 +203,16 @@
                     ]);
                 }
 
+                slider.value = val;
+                $bearer.attr('data-value', val);
+
                 slider.setSlider();
             });
 
             $inputs.on('change', function() {
+                slider.value = val;
+                $bearer.attr('data-value', val);
+
                 slider.setSlider();
             });
 
@@ -249,6 +258,10 @@
             if (typeof cb === "function") {
                 cb($levels, $inputs);
             }
+        },
+
+        getValue: function() {
+            return this.value;
         }
 
     };
@@ -264,7 +277,8 @@
 
             rtn.push({
                 setDisable: slider.setDisable.bind(slider),
-                setEnable: slider.setEnable.bind(slider)
+                setEnable: slider.setEnable.bind(slider),
+                getValue: slider.getValue.bind(slider)
             });
         });
 

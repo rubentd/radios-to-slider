@@ -55,6 +55,7 @@ Function   | Callback | Args
 ---------- | -------- | ----------------
 setDisable | true     | $levels, $inputs
 setEnable  | true     | $levels, $inputs
+getValue   | false    | -
 
 ## Demo and examples
 

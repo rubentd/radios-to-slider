@@ -5,6 +5,7 @@
 ## Added
 
 - Optimalize code
+- Add getValue() function
 
 ## Fixed
 
