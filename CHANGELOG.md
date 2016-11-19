@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## Added
+
+- Optimalize code
+
 ## Fixed
 
 - Usage text in README.md

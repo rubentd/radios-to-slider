@@ -45,13 +45,20 @@
         },
 
         reset: function() {
-            this.bearer.find('label').each(function() {
-                $(this).removeClass('slider-label');
-                $(this).css('left', 0);
+            var $labels = this.bearer.find('label'),
+                $levels = this.bearer.find('.slider-level');
+
+            $labels.each(function() {
+                var $this = $(this);
+
+                $this.removeClass('slider-label');
+                $this.css('left', 0);
             });
-            this.bearer.find('.slider-level').each(function() {
+
+            $levels.each(function() {
                 $(this).remove();
             });
+
             this.bearer.css('width', 'auto');
         },
 
@@ -64,34 +71,48 @@
         },
 
         addBaseStyle: function() {
+            var label = 0,
+                slider = this,
+                width = (this.numOptions * this.LEVEL_WIDTH) + (this.numOptions - 1) * this.LEVEL_MARGIN;
+
             this.bearer.find('input[type=radio]').hide();
-            this.bearer.addClass("radios-to-slider");
-            this.bearer.addClass(this.options.size);
-            this.bearer.css('width', (this.numOptions * this.LEVEL_WIDTH) + (this.numOptions - 1) * this.LEVEL_MARGIN + 'px');
-            var label = 0;
-            var slider = this;
+            this.bearer.addClass("radios-to-slider " + this.options.size);
+            this.bearer.css('width', width + 'px');
             this.bearer.find('label').each(function() {
-                var leftPos = slider.KNOB_WIDTH / 2 - (slider.LABEL_WIDTH / 2) + label * slider.LEVEL_MARGIN + label * slider.LEVEL_WIDTH;
-                $(this).addClass('slider-label');
-                $(this).css('left', leftPos + 'px');
+                var $this = $(this),
+                    leftPos = slider.KNOB_WIDTH / 2 - (slider.LABEL_WIDTH / 2) + label * slider.LEVEL_MARGIN + label * slider.LEVEL_WIDTH;
+
+                $this.addClass('slider-label');
+                $this.css('left', leftPos + 'px');
+
                 label++;
             });
         },
 
         //Add level indicators to DOM
         addLevels: function() {
-            var b = this.bearer;
-            var slider = this;
-            this.bearer.find('input[type=radio]').each(function() {
-                var radioId = $(this).attr('id');
-                b.append("<ins class='slider-level' data-radio='" + radioId + "'></ins>");
+            var $bearer = this.bearer,
+                $inputs = $bearer.find('input[type=radio]'),
+                $levels = $bearer.find('.slider-level'),
+                level = 0,
+                slider = this;
+
+            $inputs.each(function() {
+                var $this = $(this);
+
+                $bearer.append("<ins class='slider-level' data-radio='" + $this.attr('id') + "' value=" + $this.val() + "></ins>");
             });
-            var level = 0;
-            this.bearer.find('.slider-level').each(function() {
-                var paddingLeft = parseInt(b.css('padding-left').replace('px', ''));
-                $(this).css('left', paddingLeft + (level * slider.LEVEL_MARGIN) + (level * slider.LEVEL_WIDTH) + 'px');
+
+            $levels.each(function() {
+                var $this = $(this),
+                    paddingLeft = $bearer.css('padding-left').replace('px', '') - 0,
+                    width = paddingLeft + (level * slider.LEVEL_MARGIN) + (level * slider.LEVEL_WIDTH);
+
+                $this.css('left', width + 'px');
+
                 level++;
-            })
+            });
+
         },
 
         //Add slider bar to DOM
@@ -101,43 +122,63 @@
 
         //set width of slider bar and current level
         setSlider: function() {
-            var radio = 1;
-            var slider = this;
-            var label;
-            this.bearer.find('input[type=radio]').each(function() {
-                var radioId = $(this).attr('id');
-                if ($(this).prop('checked')) {
-                    slider.bearer.find('.slider-bar').css('display', 'block');
-                    slider.bearer.find('.slider-bar').width((radio * slider.KNOB_WIDTH) + (radio - 1) * slider.KNOB_MARGIN + 'px');
+            var $inputs = this.bearer.find('input[type=radio]'),
+                $levels = this.bearer.find('.slider-level'),
+                $labels = this.bearer.find('.slider-label'),
+                radio = 1,
+                slider = this,
+                label;
+
+            $inputs.each(function() {
+                var $this = $(this),
+                    $sliderbar = slider.bearer.find('.slider-bar'),
+                    radioId = $this.attr('id');
+
+                if ($this.prop('checked')) {
+                    var width = (radio * slider.KNOB_WIDTH) + (radio - 1) * slider.KNOB_MARGIN;
+
+                    $sliderbar.css('display', 'block');
+                    $sliderbar.width(width + 'px');
+
                     slider.currentLevel = radio;
                 }
+
                 if (slider.options.animation) {
-                    slider.bearer.find('.slider-bar').addClass('transition-enabled');
+                    $sliderbar.addClass('transition-enabled');
                 }
+
                 radio++;
             });
+
             //Set style for lower levels
             label = 0;
-            this.bearer.find('.slider-level').each(function() {
+            $levels.each(function() {
                 label++;
+
+                var $this = $(this);
+
                 if (label < slider.currentLevel) {
-                    $(this).show();
-                    $(this).addClass('slider-lower-level');
+                    $this.show();
+                    $this.addClass('slider-lower-level');
                 } else if (label == slider.currentLevel) {
-                    $(this).hide();
+                    $this.hide();
                 } else {
-                    $(this).show();
-                    $(this).removeClass('slider-lower-level');
+                    $this.show();
+                    $this.removeClass('slider-lower-level');
                 }
             });
+
             //Add bold style for selected label
             label = 0;
-            this.bearer.find('.slider-label').each(function() {
+            $labels.each(function() {
                 label++;
+
+                var $this = $(this);
+
                 if (label == slider.currentLevel) {
-                    $(this).addClass('slider-label-active');
+                    $this.addClass('slider-label-active');
                 } else {
-                    $(this).removeClass('slider-label-active');
+                    $this.removeClass('slider-label-active');
                 }
             });
         },
@@ -161,7 +202,6 @@
                 }
 
                 slider.setSlider();
-
             });
 
             $inputs.on('change', function() {
@@ -184,8 +224,10 @@
                 $inputs = this.bearer.find('input[type=radio]');
 
             $.merge($levels, $inputs).each(function() {
-                $(this).prop('disabled', true).addClass('disabled');
-                $(this).off('click change');
+                var $this = $(this);
+
+                $this.prop('disabled', true).addClass('disabled');
+                $this.off('click change');
             });
 
             if (typeof cb === "function") {
