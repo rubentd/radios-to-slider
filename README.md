@@ -34,7 +34,10 @@ jQuery plugin to create a slider using a list of radio buttons
         radios.setDisable();
 
         // Enable input
-        radios.setDisable();
+        radios.setEnable();
+
+        // Retrieve value
+        radios.getValue();
     });
 </script>
 ```
