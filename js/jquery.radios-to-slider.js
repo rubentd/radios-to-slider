@@ -210,6 +210,9 @@
             });
 
             $inputs.on('change', function() {
+                var $this = $(this),
+                    val = $this.attr('data-value');
+
                 slider.value = val;
                 $bearer.attr('data-value', val);
 
