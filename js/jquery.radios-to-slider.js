@@ -245,6 +245,7 @@
             this.options.isDisable = true;
 
             var slider = this,
+                $bearer = slider.bearer,
                 $levels = this.bearer.find('.slider-level'),
                 $inputs = this.bearer.find('input[type=radio]');
 
@@ -258,12 +259,15 @@
             if (typeof cb === "function") {
                 cb($levels, $inputs);
             }
+
+            $bearer.trigger('radiodisabled');
         },
 
         setEnable: function(cb) {
             this.options.isDisable = false;
 
             var slider = this,
+                $bearer = slider.bearer,
                 $levels = this.bearer.find('.slider-level'),
                 $inputs = this.bearer.find('input[type=radio]');
 
@@ -275,6 +279,8 @@
             if (typeof cb === "function") {
                 cb($levels, $inputs);
             }
+
+            $bearer.trigger('radiodenabled');
         },
 
         getValue: function() {

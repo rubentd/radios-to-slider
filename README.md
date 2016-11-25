@@ -60,6 +60,12 @@ setDisable | true     | $levels, $inputs
 setEnable  | true     | $levels, $inputs
 getValue   | false    | -
 
+Events      | Triggered
+----------- | -------------
+radiochange | If triggered [click, change] events
+radiodisabled | When disabled radio
+radiodenabled | When enabled radio
+
 ## Demo and examples
 
 - [rubentd.com/radios-to-slider](http://rubentd.com/radios-to-slider)
