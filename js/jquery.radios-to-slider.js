@@ -207,16 +207,30 @@
                 $bearer.attr('data-value', val);
 
                 slider.setSlider();
+
+                $bearer.trigger('radiochange');
             });
 
             $inputs.on('change', function() {
                 var $this = $(this),
-                    val = $this.attr('data-value');
+                    val = $this.attr('data-value'),
+                    radioId = $this.attr('data-radio'),
+                    radioElement = $bearer.find('#' + radioId);
+
+                radioElement.prop('checked', true);
+
+                if (slider.options.onChange) {
+                    slider.options.onChange(radioElement, [
+                        $levels,
+                        $inputs
+                    ]);
+                }
 
                 slider.value = val;
                 $bearer.attr('data-value', val);
 
                 slider.setSlider();
+                $bearer.trigger('radiochange');
             });
 
         },
@@ -270,15 +284,17 @@
     };
 
     $.fn.radiosToSlider = function(options) {
-        var rtn = [];
+        var rtn = [],
+            $this = this;
 
-        this.each(function() {
+        $this.each(function() {
             options = $.extend({}, $.fn.radiosToSlider.defaults, options);
 
             var slider = new RadiosToSlider($(this), options);
             slider.activate();
 
             rtn.push({
+                bearer: slider.bearer,
                 setDisable: slider.setDisable.bind(slider),
                 setEnable: slider.setEnable.bind(slider),
                 getValue: slider.getValue.bind(slider)
