@@ -2,10 +2,13 @@
 
 ## [Unreleased]
 
+## [0.3.2] - 2016-11-25
+
 ## Added
 
 - Optimalize code
 - Add getValue() function
+- Add events
 
 ## Fixed
 
